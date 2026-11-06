@@ -4,6 +4,14 @@ I link sites in the [ROCEEH Out of Africa Database (ROAD)](https://www.roceeh.un
 
 **Viewer:** <https://pulkitt01.github.io/road2aadr/>. A map of the linked sites confirmed by Wikidata, and for each site a timeline with ROAD's archaeological layers next to the AADR genome dates. Many caves have old layers in ROAD and much younger genomes in AADR, which is the pattern the timeline makes visible.
 
+## What the viewer shows
+
+- **Map:** each dot is a ROAD site, an archaeological site that has a matching place in AADR, the database of ancient genomes. I only show sites where both databases point to the same Wikidata entry, so I can be fairly sure the match is right. Bigger dots have more genomes.
+- **Site picker and panel:** click a dot or pick a site from the list. The panel names the matching AADR place and how far apart the two records are.
+- **Timeline:** the orange dots are genomes, placed at the age of the individual. The grey bars are the layers ROAD records at that site, each spanning the years that layer covers. Hover over either for details.
+- **Time axis:** ages are in years before 1950, so 10k means about 10,000 years ago. The scale is squeezed for very old dates so that recent and ancient things fit on one chart.
+- **What to look for:** many genomes are much younger than the site's oldest layers. That usually means people used the cave again long after the old layers formed, not that the link is wrong.
+
 ## What is in the linked dataset
 
 - 58 linked pairs: 54 ROAD sites and 51 AADR sites, covering 180 genomes (`data/out/road_aadr_links.csv`, one row per site pair, and `data/out/road_aadr_samples.csv`, one row per genome with its ID, date and publication).
