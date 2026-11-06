@@ -1,6 +1,6 @@
 """Sample ~100 candidate pairs (<=25 km), stratified by distance x name score, for hand labelling.
 
-Writes a blind sheet (no scores, shuffled) and a features file keyed by pair_id for later joins.
+Writes a shuffled sheet (distance shown, name score hidden) and a features file keyed by pair_id for later joins.
 """
 import pandas as pd
 
@@ -20,7 +20,7 @@ gold.insert(0, "pair_id", [f"P{i:03d}" for i in range(1, len(gold) + 1)])
 
 gold.drop(columns=["name_band", "dist_band"]).to_csv("data/gold/pair_features.csv", index=False)
 show = ["pair_id", "road_locality", "road_country", "road_lat", "road_lon", "road_age_min", "road_age_max",
-        "aadr_locality", "aadr_country", "aadr_lat", "aadr_lon", "aadr_n_samples", "aadr_date_min", "aadr_date_max"]
+        "aadr_locality", "aadr_country", "aadr_lat", "aadr_lon", "distance_km", "aadr_n_samples", "aadr_date_min", "aadr_date_max"]
 sheet = gold[show].copy()
 sheet["label"] = ""  # same / different / unsure
 sheet["notes"] = ""
