@@ -1,0 +1,13 @@
+kind,name,lat,lon,qid,wd_label,label_score,wd_dist_km
+road,Abri Blanchard des Roches,45.000152,1.101003,,,,
+road,Abri Caminade,44.868487,1.248703,,,,
+road,Abri Castanet,44.999663,1.101332,Q2815240,Abri Castanet,100.0,0.01
+road,Abri Cellier,44.992153,1.053517,Q22988214,abri Cellier,100.0,0.25
+road,Abri Chadourne,44.936467,1.01614,,,,
+road,Abri Kontija 002,45.138551,13.719091,,,,
+road,Abri Labattut,45.000359,1.100449,Q22988134,Abri Labattut,100.0,0.1
+road,Abri Pataud,44.936947,1.012781,Q331390,Abri Pataud,100.0,0.0
+road,Abri Pié Lombard,43.702008,7.044625,,,,
+road,Abri de Cro-Magnon,44.940108,1.009982,Q331409,Cro-Magnon rock shelter,100.0,0.03
+road,Abri du Facteur,44.977295,1.055363,Q22988224,Le Facteur rock shelter,100.0,1.26
+road,Abri du Maras,44.312026,4.562827,Q137973191,Abri du Maras,100.0,1.15
