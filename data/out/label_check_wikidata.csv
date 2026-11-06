@@ -1,0 +1,101 @@
+pair_id,road_locality,aadr_locality,distance_km,label,road_qid,aadr_qid,wikidata,check
+P001,Casal de Pazzi,"Casal Bertole (Lazio, Rome)",4.15,different,,,no_info,no_info
+P002,Sarstedt,"Anderten (Niedersachsen, Hannover, Hannover Region)",13.96,different,Q15944997,Q2239440,different_qid,agrees
+P003,Tam Hang Central,"Tam Hang (Houaphanh, Xon, Namneun)",4.53,broader,,,no_info,no_info
+P004,Kostenki 9,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",23.02,different,,,no_info,no_info
+P005,Andance,Grotte Mandrin (Rhone-Alpes),24.89,different,,Q3117102,no_info,no_info
+P006,Ksiecia Jozefa,"Krakow (Lesser Poland Province, Kraków)",1.12,broader,Q124363797,Q31487,different_qid,not_checkable
+P007,Kostenki 15,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",22.81,different,,,no_info,no_info
+P008,Riparo Tagliente,"Riparo Tagliente (Veneto, Verona, Stallavena di Grezzana)",0.38,same,Q22071376,Q22071376,same_qid,agrees
+P009,Cueva del Angel,"Covacha del Angel (Andalusia, Córdoba, Lucena)",6.86,unsure,Q48782291,,no_info,no_info
+P010,Fuente Nueva 3,"Cerro de la Virgen (Andalusia, Granada, Orce)",9.57,different,Q97604584,Q6169527,different_qid,agrees
+P011,Nam Lot,Tam Pa Ping (Northeast Huapan),0.4,different,,,no_info,no_info
+P012,Tam Hang Central,Tam Pa Ping (Northeast Huapan),0.25,different,,,no_info,no_info
+P013,Jaksice II,"Koszyce-3 (Lesser Poland Province, Proszowice County, Koszyce)",6.12,different,,,no_info,no_info
+P014,Le Moustier_Abri inférieur,"La Rochette (Nouvelle-Aquitaine Region, Dordogne Department, Sarlat-la-Canéda Arrondissement)",1.96,different,,,no_info,no_info
+P015,Paglicci,"Paglicci (Apulia, Foggia, Rignano Garganico)",6.51,same,Q3777010,Q3777010,same_qid,agrees
+P016,Tam Ngu Hao,"Tam Hang (Houaphanh, Xon, Namneun)",4.3,different,Q124287691,,no_info,no_info
+P017,Hohlenstein-Bärenhöhle,"Niederstotzingen (Baden-Württemberg, Stuttgart, Heidenheim)",4.55,different,,Q584682,no_info,no_info
+P018,Krems-Wachtberg,"Krems-Wachtberg (Niederösterreich, Krems an der Donau (Stadt), Innen Stadt)",0.86,same,Q19288309,,no_info,no_info
+P019,Börslingen,"Ofnet (Bayern, Schwaben, Günzburg)",16.24,different,Q636063,,no_info,no_info
+P020,Shamb-2,"Harjis (Syunik Province, Tatev Municipality)",7.31,different,,Q2074292,no_info,no_info
+P021,Langmannersdorf Lagerplatz B,"Ratzersdorf (Niederösterreich, Sankt Pölten(Land)",19.78,different,,Q136917815,no_info,no_info
+P022,Galería,"El Portalón Cave (Castilla y León, Burgos, Atapuerca)",0.18,different,,,no_info,no_info
+P023,Subalyuk,"Mezőkövesd-Mocsolyás (Borsod-Abaúj-Zemplén County, Mezőkövesd)",20.53,different,,,no_info,no_info
+P024,Erd,"Erd-4 (Pest County, Érd)",6.7,different,Q193050,,no_info,no_info
+P025,Grotte de la Crouzade,"Grotte-des-Tortues (Occitanie Region, Aude Department, Narbonne Arrondissement, La Clape)",3.2,different,Q3117192,,no_info,no_info
+P026,Jammertal,"Hohle-Fels-Ach-Valley (Baden-Württemberg, Tübingen, Reutlingen)",24.62,different,,,no_info,no_info
+P027,Gvardjilas Klde Cave,"Kotias Klde (Imereti, Raion Chiatura, Chiatura)",13.64,different,,Q42706934,no_info,no_info
+P028,Orkhon-7,"Baga-Artsatyn-Am-NW (Övörkhangai Province, Kharkhorin District)",5.56,different,,,no_info,no_info
+P029,Gruta do Caldeirão,"Gruta do Caldeirão (Santarém, Além da Ribeira e Pedreira)",0.18,same,Q66815000,Q66815000,same_qid,agrees
+P030,Markermeer,"Hoogkarspel-Houterpolder-West (Noord-Holland, Drechterland)",18.95,different,Q939766,,no_info,no_info
+P031,Les Bossats - Ormesson,"Ormesson (Les Bossats, France)",1.52,same,,Q654887,no_info,no_info
+P032,Hang Boi,"Man Bac (Ninh Binh Province, Yên Mô District)",17.14,different,,Q55624307,no_info,no_info
+P033,Grotte de la Crouzade,"Le Crès (Occitanie Region, Hérault, Béziers)",9.35,different,Q3117192,,no_info,no_info
+P034,Lapa do Picareiro,Gruta_do_Caldeirão (Estremadura),24.1,different,Q106546101,Q66815000,different_qid,agrees
+P035,Tam Pa Ling,"Tam Hang (Houaphanh, Xon, Namneun)",4.53,different,Q27922296,,no_info,no_info
+P036,Tam Hang South,Tam Pa Ping (Northeast Huapan),0.25,different,,,no_info,no_info
+P037,Stuttgart-Untertürkheim,"Stuttgart-Mühlhausen-2 (Baden-Württemberg, Stuttgart-Stadtkreis)",4.91,different,Q897283,,no_info,no_info
+P038,Pietraszyn 49,"Racibórz-Stara Wieś (Silesian Province, Racibórz County, Racibórz)",9.33,different,,,no_info,no_info
+P039,Gruta da Aroeira,"Galeria da Cisterna (Santarém, Almonda)",0.62,different,Q29015763,,no_info,no_info
+P040,Dolni Vestonice II,"Dolní Věstonice (South Moravian Region, Břeclav District)",1.83,unsure,Q37178299,Q2915044,different_qid,not_checkable
+P041,Neslovice,Vedrovice (Moravia),13.18,different,Q1964602,Q1952926,different_qid,agrees
+P042,Kalavan 6 open air,"Lchashen (Gegharkunik Province, Sevan Municipality)",20.53,different,,Q1528531,no_info,no_info
+P043,Panga ya Saidi,Panga ya Saidi (Kilifi County),4.71,same,Q53443604,Q53443604,same_qid,agrees
+P044,Getzersdorf,"Ratzersdorf (Niederösterreich, Sankt Pölten(Land)",9.35,different,Q106939522,Q136917815,different_qid,agrees
+P045,Yana RHS,"Yana-River (Sakha Republic, Ust-Yansky Ulus)",0.39,same,,,no_info,no_info
+P046,Sima del Elefante,"El Portalón Cave (Castilla y León, Burgos, Atapuerca)",0.18,different,Q28041051,,no_info,no_info
+P047,Grotte Mandrin,Grotte Mandrin (Rhone-Alpes),0.58,same,Q3117102,Q3117102,same_qid,agrees
+P048,Kostenki 10,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",24.32,different,,,no_info,no_info
+P049,Ksar Akil,Beirut,12.39,different,Q3817236,Q98073118,different_qid,agrees
+P050,Makarovo-4,"Makarovo-1 (Irkutsk Oblast, Kachugskiy District)",8.16,different,,,no_info,no_info
+P051,Markermeer,"Wervershoof-Zwaagdijk (Noord-Holland, Medemblik)",20.76,different,Q939766,,no_info,no_info
+P052,Istallöskö,"Sirok-Akasztómály (Heves County, Pétervására)",22.94,different,Q1098335,,no_info,no_info
+P053,Vinneuf - Les Hauts Massous,"Grotte di Pradis (Friuli-Venezia Giulia, Pordenone)",18.24,different,,,no_info,no_info
+P054,Kostenki 8,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",22.74,different,,,no_info,no_info
+P055,Gran Dolina,"El Mirador Cave (Castilla y León, Burgos, Atapuerca)",2.59,different,Q5884310,,no_info,no_info
+P056,Kostenki 11,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",24.36,different,,,no_info,no_info
+P057,Broion,"Grottina dei Covoloni del Broion (Veneto, Vicenza, Berici Hills)",0.84,different,,Q137475953,no_info,no_info
+P058,Afontova Gora II,"Afontova-Gora (Krasnoyarsk Krai, Krasnoyarsk Municipality)",5.25,same,,Q4072819,no_info,no_info
+P059,Ficoncella,"Tarquinia (Lazio, Viterbo)",2.89,broader,,Q179999,no_info,no_info
+P060,Leang Balangajia 1,"Leang Panninge (South Sulawesi, Maros Regency)",3.27,different,,,no_info,no_info
+P061,Kostenki 17,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",25.0,different,,,no_info,no_info
+P062,Sabanikha,"Grishkin-Log-1 (Khakassia Republic of, Bogradsky District)",3.02,different,,,no_info,no_info
+P063,Ortvale Klde,"Kotias Klde (Imereti, Raion Chiatura, Chiatura)",3.68,different,,Q42706934,no_info,no_info
+P064,Tabula Traiana,"Hajdučka-Vodenica (Bor District, Kladovo Municipality, Hajdučka)",1.2,different,Q2091689,Q60998815,different_qid,agrees
+P065,Ust-Kanskaya,"Kaminnaya-Cave (Altai Republic, Ust-Kansky District)",0.12,unsure,Q4478429,,no_info,no_info
+P066,Kostenki 6,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",22.56,different,,,no_info,no_info
+P067,Gruta da Oliveira,"Galeria da Cisterna (Santarém, Almonda)",0.6,different,,,no_info,no_info
+P068,Krakow Spadzista Street,"Krakow (Lesser Poland Province, Kraków)",1.86,broader,,Q31487,no_info,no_info
+P069,Grotte de Saint-Marcel,Grotte Mandrin (Rhone-Alpes),23.67,different,Q1837168,Q3117102,different_qid,agrees
+P070,Gruta da Aroeira,Gruta_do_Caldeirão (Estremadura),23.23,different,Q29015763,Q66815000,different_qid,agrees
+P071,Dzudzuana Cave,"Dzudzuana Cave (Imereti, Raion Chiatura, Chiatura)",0.11,same,Q42706917,Q42706917,same_qid,agrees
+P072,Cueva Morín,Cantabria,13.17,exclude,,Q5033517,no_info,no_info
+P073,Lapa do Anecrial,"Lugar do Canto (Santarém, Valverde)",15.28,different,,,no_info,no_info
+P074,Dolni Vestonice III,"Dolní Věstonice (South Moravian Region, Břeclav District)",1.83,unsure,,Q2915044,no_info,no_info
+P075,Valle di Castiglione,"Viale Rossini (Necropoli Salaria) (Lazio, Metropolitan City of Rome)",22.6,different,,,no_info,no_info
+P076,Salkhit,"Salkhit (Khentii Province, Norovlin District, Salkhit Valley)",19.62,same,,,no_info,no_info
+P077,Fontana Nuova,"Contrada Paolina (Sicily, Ragusa)",8.99,different,,,no_info,no_info
+P078,Yiron_Y27_Y28,"Abel-Beth-Maacah (Upper Galilee , Metula)",23.45,different,,,no_info,no_info
+P079,Ponte Mammolo,"Casal Bertole (Lazio, Rome)",4.12,different,Q3907988,,no_info,no_info
+P080,Ilsenhöhle,"Urdhöhle (Thüringen, Kyffhäuserkreis, Döbritz)",6.05,different,Q1659237,,no_info,no_info
+P081,Dolni Vestonice I,"Dolní Věstonice-2 (South Moravian Region, Břeclav District)",1.83,different,Q2530804,,no_info,no_info
+P082,Ortvale Klde,"Dzudzuana Cave (Imereti, Raion Chiatura, Chiatura)",4.51,different,,Q42706917,no_info,no_info
+P083,Leang Timpuseng,"Leang Panninge (South Sulawesi, Maros Regency)",4.98,different,,,no_info,no_info
+P084,Gorhams Cave,Europa 1 (Gibraltar),1.31,different,,,no_info,no_info
+P085,Cova Negra,"La Coveta Emparetà (Valencian Community, Valencia, Bocairent)",24.84,different,Q9018453,,no_info,no_info
+P086,Ust-Ishim,"Ust'-Ishim (Omsk Oblast, Ust-Ishimsky District)",4.59,same,Q4478405,Q4478405,same_qid,agrees
+P087,Leang Bulu Sipong 4,"Leang Panninge (South Sulawesi, Maros Regency)",3.27,different,Q97234066,,no_info,no_info
+P088,Sedia del Diavolo,"Viale Rossini (Necropoli Salaria) (Lazio, Metropolitan City of Rome)",3.02,different,Q56256395,,no_info,no_info
+P089,Stratzing/Krems-Rehberg,"Krems-Wachtberg (Niederösterreich, Krems an der Donau (Stadt), Innen Stadt)",3.52,different,,,no_info,no_info
+P090,Liang Bua,"Liang Bua (East Nusa Tenggara, Flores)",1.11,same,Q24641073,Q24641073,same_qid,agrees
+P091,Kostenki 4,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",23.06,different,,,no_info,no_info
+P092,Riparo Bombrini,"Pendimoun (Provence-Alpes-Côte d'Azur Region, Alpes-Maritimes Department, Nice Arrondissement)",3.54,different,Q15842523,Q13518297,different_qid,agrees
+P093,Cova Beneito,"Cova d'en Pardo (Valencian community, Alicante, Planes)",11.79,different,,,no_info,no_info
+P094,Kostenki 1,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",24.66,different,,,no_info,no_info
+P095,Tabun Cave,"Hazor (Northern District, Yizre'el)",22.13,different,Q2906739,,no_info,no_info
+P096,Kostenki 2,"Kostenki (Voronezh Oblast, Liskinsky District, Starokhvorostanskoye)",24.43,different,,,no_info,no_info
+P097,Dieu Rockshelter,Mai Da Dieu (Northern Thanh Hoa),2.89,same,,,no_info,no_info
+P098,Grabschütz,"Bad-Dürrenberg (Sachsen-Anhalt, Sachsen-Anhalt, Saalekreis)",24.94,different,Q19965018,Q136559448,different_qid,agrees
+P099,Mezmaiskaya Cave,"Mezmaiskaya-cave (Krasnodar Krai, Apsheronsky District)",3.58,same,Q34003,Q34003,same_qid,agrees
+P100,Stuttgart-Untertürkheim,"Stuttgart-Mühlhausen-1 (Baden-Württemberg, Stuttgart, Stuttgart-Stadtkreis)",4.91,different,Q897283,,no_info,no_info
