@@ -4,3 +4,4 @@ __pycache__/
 .RData
 data/raw/
 data/interim/
+.DS_Store
