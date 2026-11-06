@@ -33,7 +33,7 @@
 <body>
 <header>
   <h1>ROAD sites linked to AADR ancient genomes</h1>
-  <p>Sites from the ROCEEH Out of Africa Database (ROAD) matched to genomes in the Allen Ancient DNA Resource (AADR v66.p1). Click a site for its timeline. <a href="https://github.com/PulkitT01/road2aadr">Code, data and evaluation</a></p>
+  <p>Sites from the ROCEEH Out of Africa Database (ROAD) matched to genomes in the Allen Ancient DNA Resource (AADR v66.p1). Every site shown here has a shared Wikidata item on both sides. Click a site for its timeline. <a href="https://github.com/PulkitT01/road2aadr">Code, data and evaluation</a></p>
 </header>
 <main>
   <div id="map" role="application" aria-label="Map of linked sites"></div>
@@ -78,7 +78,7 @@ d3.json("data/sites.json").then(sites => {
   pick.selectAll("option").data(sites).join("option").attr("value", d => d.name).text(d => `${d.name} (${d.country})`);
   pick.on("change", e => select(e.target.value));
   d3.select("#legend").html("")
-    .selectAll("span").data(Object.keys(COLORS)).join("span")
+    .selectAll("span").data(Object.keys(COLORS).filter(k => sites.some(s => s.links.some(l => l.evidence === k)))).join("span")
     .html(k => `<i class="dot" style="background:${COLORS[k]}"></i>${EVIDENCE[k]}`);
 
   function select(name) {

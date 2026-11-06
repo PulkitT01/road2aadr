@@ -1,6 +1,6 @@
 """Build docs/data/sites.json for the viewer: one entry per linked ROAD site with layers and AADR genomes.
 
-Pairs the gold set labelled "different" (known wrong links) are left out of the viewer, not out of the CSVs.
+Only links confirmed by a shared Wikidata item go into the viewer; the CSVs keep every link with its evidence column.
 """
 import json
 
@@ -11,7 +11,7 @@ links = pd.read_csv("data/out/road_aadr_links.csv")
 samples = pd.read_csv("data/out/road_aadr_samples.csv")
 asm = pd.read_csv("data/raw/assemblages.csv")
 
-links = links[links.gold_label != "different"]
+links = links[links.evidence.str.contains("wikidata")]
 samples = samples.merge(links[["road_locality", "aadr_locality", "aadr_lat", "aadr_lon"]].round(6),
                         on=["road_locality", "aadr_locality", "aadr_lat", "aadr_lon"])
 

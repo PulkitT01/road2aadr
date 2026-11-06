@@ -2,13 +2,13 @@
 
 I link sites in the [ROCEEH Out of Africa Database (ROAD)](https://www.roceeh.uni-tuebingen.de/roadweb/) to ancient genomes in the [Allen Ancient DNA Resource (AADR)](https://doi.org/10.7910/DVN/FFIDCW), publish the linked dataset, and evaluate how well different linking methods work against a hand-checkable gold standard.
 
-**Viewer:** <https://pulkitt01.github.io/road2aadr/>. A map of the linked sites, and for each site a timeline with ROAD's archaeological layers next to the AADR genome dates. Many caves have old layers in ROAD and much younger genomes in AADR, which is the pattern the timeline makes visible.
+**Viewer:** <https://pulkitt01.github.io/road2aadr/>. A map of the linked sites confirmed by Wikidata, and for each site a timeline with ROAD's archaeological layers next to the AADR genome dates. Many caves have old layers in ROAD and much younger genomes in AADR, which is the pattern the timeline makes visible.
 
 ## What is in the linked dataset
 
 - 58 linked pairs: 54 ROAD sites and 51 AADR sites, covering 180 genomes (`data/out/road_aadr_links.csv`, one row per site pair, and `data/out/road_aadr_samples.csv`, one row per genome with its ID, date and publication).
 - A pair is linked if a name-and-distance rule says so (name score of at least 95 and at most 10 km apart) or if both sites share a Wikidata item. The `evidence` column says which: 31 rule only, 25 rule plus Wikidata, 2 Wikidata only.
-- The viewer shows 52 of the 54 ROAD sites. Two pairs that the gold set labels `different` are left out of the viewer but stay in the CSVs, with their label in `gold_label`.
+- The viewer shows only the links confirmed by a shared Wikidata item: 27 pairs, 26 ROAD sites and 100 genomes. The CSVs keep every link, so you can filter on the `evidence` column; the gold label, where there is one, is in `gold_label`.
 - 38 of the 58 linked pairs are not in the gold set, so their quality is only estimated by the evaluation below.
 
 ## What ROAD already says about ancient DNA
