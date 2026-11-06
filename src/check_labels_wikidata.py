@@ -6,7 +6,9 @@ limited, and the QIDs were found with name similarity and coordinates, so it is 
 """
 import pandas as pd
 
-rec = pd.read_csv("data/out/wikidata_reconciled.csv")
+from baseline import fmt_ci
+
+rec =pd.read_csv("data/out/wikidata_reconciled.csv")
 road_q = rec[rec.kind == "road"].drop_duplicates("name").set_index("name").qid
 rec["key"] = rec.name + "|" + rec.lat.round(5).astype(str) + "|" + rec.lon.round(5).astype(str)
 aadr_q = rec[rec.kind == "aadr"].drop_duplicates("key").set_index("key").qid
@@ -41,6 +43,10 @@ lines = ["# Gold labels vs Wikidata", "",
          f"{(lab.check == 'agrees').sum()} agree, {(lab.check == 'CONFLICT').sum()} conflict, "
          f"{(lab.check == 'no_info').sum()} have no Wikidata information.", "",
          "```", pd.crosstab(g.label, g.check).to_string(), "```", ""]
+y, p = lab.label == "same", lab.wikidata == "same_qid"
+tp, fp, fn = int((y & p).sum()), int((~y & p).sum()), int((y & ~p).sum())
+lines += [f"Wikidata join as a linking method on these {len(lab)} pairs (same QID = linked): "
+          f"precision {fmt_ci(tp, tp + fp)} (TP={tp}, FP={fp}), recall {fmt_ci(tp, tp + fn)} (TP={tp}, FN={fn}).", ""]
 conflicts = g[g.check == "CONFLICT"]
 lines += ["Conflicts to review by hand:", "", "```",
           conflicts[cols].to_string(index=False) if len(conflicts) else "none", "```"]

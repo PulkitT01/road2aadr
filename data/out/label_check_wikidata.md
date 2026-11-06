@@ -12,6 +12,8 @@ same            9        6              0
 unsure          0        3              1
 ```
 
+Wikidata join as a linking method on these 91 pairs (same QID = linked): precision 1.00 [0.70, 1.00] (TP=9, FP=0), recall 0.60 [0.36, 0.80] (TP=9, FN=6).
+
 Conflicts to review by hand:
 
 ```

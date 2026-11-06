@@ -35,3 +35,27 @@ A pair is one ROAD locality and one AADR site (name plus coordinates) within 25 
 
 - ROAD through the `roadDB` R package, snapshot pulled on 2026-11-06.
 - AADR v66.p1, `v66.p1_1240K.aadr.PUB.anno`, checked against the published md5.
+
+## Results so far
+
+All numbers use the 91 gold pairs labeled `same` or `different` (15 `same`), so the confidence intervals are wide. The gold labels are model-made, not expert-made (see above). Details are in `data/out/`.
+
+### Wikidata matching
+
+I matched sites to Wikidata items using name similarity and coordinates (`src/wikidata.py`). 243 of 659 ROAD sites (37%) and 232 of 620 AADR sites (37%) in the candidate pairs got an item. 27 of the 1,543 candidate pairs share an item (`data/out/wikidata_links.csv`).
+
+I used the shared item as a third linking method, and also as a partial check on the gold labels (`src/check_labels_wikidata.py`, results in `data/out/label_check_wikidata.md`):
+
+- 22 of the 100 gold pairs have a Wikidata item on both sides. Of the 91 `same`/`different` pairs, 20 agree with Wikidata and none conflict. The other 71 have no Wikidata information and are still unchecked.
+- This supports the labels but does not prove them. I found the items with name similarity and coordinates, the same signals the baseline uses, so agreement on easy pairs is partly circular. The uncertain pairs (`broader`, `unsure`) are exactly where Wikidata has no answer.
+- As a linking method, a shared item gives precision 1.00 [0.70, 1.00] and recall 0.60 [0.36, 0.80] (9 correct links, no wrong links, 6 misses). It is cautious: it never linked wrongly, but it misses matches because many sites have no Wikidata item.
+
+### Method comparison
+
+| Method | Precision (95% CI) | Recall (95% CI) |
+|---|---|---|
+| Rule baseline (name and distance thresholds, held-out) | 0.87 [0.62, 0.96] | 0.87 [0.62, 0.96] |
+| Wikidata join | 1.00 [0.70, 1.00] | 0.60 [0.36, 0.80] |
+| Local LLM judge, first prompt (Qwen 3.5 9B) | 0.28 [0.18, 0.42] | 1.00 [0.80, 1.00] |
+
+The LLM judge over-links: it found all 15 true matches but also called 38 of the 76 `different` pairs `same`, treating a nearby location as proof of identity. My prompt told it that caves are reused over time, and it quoted that line to justify wrong answers. This is the first prompt, reported as it came out; I have not tuned it on the gold set yet.
