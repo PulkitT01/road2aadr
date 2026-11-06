@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.Rhistory
+.RData
+data/raw/
+data/interim/
