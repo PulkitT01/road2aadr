@@ -90,7 +90,7 @@ def main():
            f"Model: {MODEL} via Ollama, temperature 0, no web access. Judged {len(df)} pairs in {df.judge_s.sum() / 60:.1f} min total.",
            "Judge answer counts: " + ", ".join(f"{k}={v}" for k, v in df.judge.value_counts().items()), "",
            f"Scored on {len(d)} same/different gold pairs ({d.y.sum()} same). Hybrid sent {routed.sum()} of {len(d)} pairs to the LLM.",
-           "Gold labels were made by an LLM, not a human expert (see README).", "",
+           "Gold labels were made by Claude Opus 5.5 with web search, not a human expert (see README).", "",
            "| System | Precision (95% CI) | Recall (95% CI) | F1 | Pop.-weighted P / R |", "|---|---|---|---|---|"]
     y = d.y.to_numpy()
     for name, col in [("baseline (held-out)", "baseline"), ("LLM judge alone", "judge_same"), ("hybrid", "hybrid")]:

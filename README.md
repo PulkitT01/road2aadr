@@ -4,12 +4,12 @@ Linking sites in the ROCEEH Out of Africa Database (ROAD) to ancient genomes in 
 
 ## How the gold-standard labels were made
 
-**The labels in `data/gold/to_label.csv` were not made by a human expert.** I had a large frontier language model with web search label the 100 candidate pairs. I did not label them myself, and no domain expert checked them. Treat them as model-assisted labels, not ground truth.
+**The labels in `data/gold/to_label.csv` were not made by a human expert.** I had Claude Opus 5.5, a large frontier language model, label the 100 candidate pairs with web search enabled and high reasoning effort. I did not label them myself, and no domain expert checked them. Treat them as model-assisted labels, not ground truth.
 
 What this means for the evaluation:
 
 - The labels can be wrong, especially where the model had to look up which excavation area a genome came from. Its own notes flag several pairs as depending on the exact sample ID (for example P040 and P074, Dolní Věstonice II vs III).
-- I will evaluate an LLM judge against these labels. Because an LLM produced the labels, the two can share blind spots, so agreement may look better than it really is. I will say this next to every precision and recall number I report.
+- I evaluate an LLM judge (Qwen 3.5 9B, run locally through Ollama, no web access) against these labels. Because an LLM produced the labels, the two can share blind spots, so agreement may look better than it really is. The judge is from a different model family than the labeller, which should reduce that, but not remove it. I will say this next to every precision and recall number I report.
 - The label set extends my original `same / different / unsure` scheme with `broader` and `exclude`, which the model used.
 
 Label definitions I am using:
