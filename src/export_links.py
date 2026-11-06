@@ -2,8 +2,9 @@
 
 road_aadr_links.csv   one row per linked ROAD locality x AADR site pair
 road_aadr_samples.csv the AADR individuals behind each link (IDs, dates, publication)
-A pair is linked if the rule says so (name_score >= 95 and distance <= 10 km, the thresholds the baseline
-cross-validation picked in every fold) or if both sites share a Wikidata item.
+A pair is published only if both sites share a Wikidata item. The name-and-distance rule is not used to
+select links (it was tuned on the gold set and is only about 0.87 precise); the evidence column records
+whether the rule also agreed.
 """
 import pandas as pd
 
@@ -31,7 +32,7 @@ gold = pd.read_csv("data/gold/to_label.csv")
 gold = keyed(gold.rename(columns={"label": "gold_label"}))[KEY + ["gold_label"]]
 c = c.merge(gold, on=KEY, how="left")
 
-links = c[c.link_rule | c.link_wikidata].copy()
+links = c[c.link_wikidata].copy()
 links["evidence"] = links.apply(
     lambda r: "rule+wikidata" if r.link_rule and r.link_wikidata else "rule" if r.link_rule else "wikidata", axis=1)
 cols = ["road_locality", "road_country", "road_lat", "road_lon", "road_age_min", "road_age_max",

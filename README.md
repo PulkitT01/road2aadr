@@ -2,11 +2,11 @@
 
 I link sites in the [ROCEEH Out of Africa Database (ROAD)](https://www.roceeh.uni-tuebingen.de/roadweb/) to ancient genomes in the [Allen Ancient DNA Resource (AADR)](https://doi.org/10.7910/DVN/FFIDCW), publish the linked dataset, and evaluate how well different linking methods work against a hand-checkable gold standard.
 
-**Viewer:** <https://pulkitt01.github.io/road2aadr/>. A map of the linked sites confirmed by Wikidata, and for each site a timeline with ROAD's archaeological layers next to the AADR genome dates. Many caves have old layers in ROAD and much younger genomes in AADR, which is the pattern the timeline makes visible.
+**Viewer:** <https://pulkitt01.github.io/road2aadr/>. A map of the linked sites, and for each site a timeline with ROAD's archaeological layers next to the AADR genome dates. Many caves have old layers in ROAD and much younger genomes in AADR, which is the pattern the timeline makes visible.
 
 ## What the viewer shows
 
-- **Map:** each dot is a ROAD site, an archaeological site that has a matching place in AADR, the database of ancient genomes. I only show sites where both databases point to the same Wikidata entry, so I can be fairly sure the match is right. Bigger dots have more genomes.
+- **Map:** each dot is a ROAD site, an archaeological site that has a matching place in AADR, the database of ancient genomes. I only publish sites where both databases point to the same Wikidata entry, so I can be fairly sure the match is right. Bigger dots have more genomes.
 - **Site picker and panel:** click a dot or pick a site from the list. The panel names the matching AADR place and how far apart the two records are.
 - **Timeline:** the orange dots are genomes, placed at the age of the individual. The grey bars are the layers ROAD records at that site, each spanning the years that layer covers. Hover over either for details.
 - **Time axis:** ages are in years before 1950, so 10k means about 10,000 years ago. The scale is squeezed for very old dates so that recent and ancient things fit on one chart.
@@ -14,10 +14,10 @@ I link sites in the [ROCEEH Out of Africa Database (ROAD)](https://www.roceeh.un
 
 ## What is in the linked dataset
 
-- 58 linked pairs: 54 ROAD sites and 51 AADR sites, covering 180 genomes (`data/out/road_aadr_links.csv`, one row per site pair, and `data/out/road_aadr_samples.csv`, one row per genome with its ID, date and publication).
-- A pair is linked if a name-and-distance rule says so (name score of at least 95 and at most 10 km apart) or if both sites share a Wikidata item. The `evidence` column says which: 31 rule only, 25 rule plus Wikidata, 2 Wikidata only.
-- The viewer shows only the links confirmed by a shared Wikidata item: 27 pairs, 26 ROAD sites and 100 genomes. The CSVs keep every link, so you can filter on the `evidence` column; the gold label, where there is one, is in `gold_label`.
-- 38 of the 58 linked pairs are not in the gold set, so their quality is only estimated by the evaluation below.
+- 27 linked pairs: 26 ROAD sites and 27 AADR sites, covering 100 genomes (`data/out/road_aadr_links.csv`, one row per site pair, and `data/out/road_aadr_samples.csv`, one row per genome with its ID, date and publication).
+- A pair is published only if both sites have the same Wikidata item. I found the items with name search plus coordinates within 10 km (`src/wikidata.py`). I do not publish links chosen only by my name-and-distance rule: I tuned it on the gold set, and on held-out gold pairs about 13% of its links were wrong. The `evidence` column says whether that rule also agreed: 25 pairs yes, 2 no.
+- 9 of the 27 pairs are in the gold set, all labeled `same`. The other 18 are not in the gold set, so their quality is only estimated by the evaluation below.
+- The viewer shows all 27 pairs.
 
 ## What ROAD already says about ancient DNA
 
@@ -73,7 +73,7 @@ All numbers use the 91 gold pairs labeled `same` or `different` (15 `same`), so 
 - The gold labels come from one model, with no human expert and no inter-annotator agreement.
 - Only 15 gold pairs are true matches, so every number has a wide interval.
 - Recall is only relative to the 25 km candidate radius. A true match with a badly wrong coordinate is never considered. AADR individuals without coordinates (3.4%) are excluded.
-- The rule thresholds were chosen on the same gold set that scores them (cross-validated for the table, but the published links use the thresholds picked on all of it).
+- The published links come only from the Wikidata join, which missed 6 of the 15 true matches in the gold set (recall 0.60). So the dataset is small and favours sites well known enough to have a Wikidata item.
 - ROAD covers about 3 million years to 20,000 years ago, while most AADR genomes are far younger, so true overlaps are few and the linked set is small.
 - ROAD layer ages and AADR dates come from different dating conventions (see the note under each timeline), so the timelines compare them only roughly.
 
