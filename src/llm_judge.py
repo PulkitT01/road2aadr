@@ -54,7 +54,9 @@ def parse(raw):
         d = json.loads(m.group(0))
         return (d["label"], d.get("reason", "")) if d["label"] in LABELS else ("invalid", raw)
     except (AttributeError, KeyError, ValueError, TypeError):
-        return "invalid", raw
+        # the model sometimes drops the closing brace; the label itself is still readable
+        m = re.search(r'"label"\s*:\s*"(\w+)"', raw)
+        return (m.group(1), raw) if m and m.group(1) in LABELS else ("invalid", raw)
 
 
 def judge_all(feat):
@@ -76,6 +78,7 @@ def main():
     df, pop = gold_frame()
     judge_all(df)
     log = pd.DataFrame([json.loads(l) for l in LOG.read_text().splitlines()]).drop_duplicates("pair_id", keep="last")
+    log["label"] = log.raw.map(lambda r: parse(r)[0])  # re-parse so parser fixes apply to old answers
     df = df.merge(log[["pair_id", "label", "seconds"]].rename(columns={"label": "judge", "seconds": "judge_s"}), on="pair_id")
     base = pd.read_csv("data/out/baseline_predictions.csv")[["pair_id", "pred"]].rename(columns={"pred": "baseline"})
 
