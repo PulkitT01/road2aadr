@@ -89,7 +89,8 @@ def evaluate(df, title):
     return df.assign(pred=p)
 
 
-def main():
+def gold_frame():
+    """Gold pairs with features, labels, stratum, and the candidate count per stratum."""
     lab = pd.read_csv("data/gold/to_label.csv")[["pair_id", "label"]]
     feat = pd.read_csv("data/gold/pair_features.csv")
     cand = pd.read_csv("data/interim/candidates.csv")
@@ -99,9 +100,21 @@ def main():
         return (pd.cut(d.name_score, [-1, 50, 85, 101], labels=False).astype(str) + "/"
                 + pd.cut(d.distance_km, [-1, 5, 25], labels=False).astype(str))
 
-    pop = strata(cand).value_counts()
     df = feat.merge(lab, on="pair_id")
     df["stratum"] = strata(df)
+    return df, strata(cand).value_counts()
+
+
+def scored(df, pop, mapping):
+    """Rows whose label is in mapping, with a boolean y and a population weight."""
+    d = df[df.label.isin(mapping)].copy()
+    d["y"] = d.label.map(mapping).astype(bool)
+    d["weight"] = d.stratum.map(pop) / d.groupby("stratum").stratum.transform("size")
+    return d
+
+
+def main():
+    df, pop = gold_frame()
 
     say("# Baseline results (rule: name_score and distance thresholds)")
     say()
@@ -113,10 +126,7 @@ def main():
             "Sensitivity: broader counted as different": {"same": True, "different": False, "broader": False},
             "Sensitivity: broader counted as same": {"same": True, "different": False, "broader": True}}
     for i, (title, mapping) in enumerate(runs.items()):
-        d = df[df.label.isin(mapping)].copy()
-        d["y"] = d.label.map(mapping).astype(bool)
-        d["weight"] = d.stratum.map(pop) / d.groupby("stratum").stratum.transform("size")
-        res = evaluate(d, title)
+        res = evaluate(scored(df, pop, mapping), title)
         if i == 0:
             res[["pair_id", "label", "name_score", "distance_km", "pred"]].to_csv(
                 "data/out/baseline_predictions.csv", index=False)
