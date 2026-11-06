@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>road2aadr: ROAD sites linked to AADR ancient genomes</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root { --ink:#1f2933; --muted:#5f6b7a; --line:#d5dbe3; --layer:#8497b0; --genome:#c2410c; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ink); display:flex; flex-direction:column; height:100vh; }
+  header { padding:10px 16px; border-bottom:1px solid var(--line); }
+  header h1 { margin:0; font-size:17px; }
+  header p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+  main { flex:1; display:flex; min-height:0; }
+  #map { flex:1 1 52%; min-width:0; }
+  #panel { flex:1 1 48%; min-width:0; overflow-y:auto; padding:12px 16px; border-left:1px solid var(--line); }
+  select { font:inherit; padding:4px 6px; max-width:100%; }
+  h2 { margin:10px 0 2px; font-size:16px; }
+  .sub { color:var(--muted); font-size:13px; margin:0 0 6px; }
+  ul.links { margin:4px 0 10px; padding-left:18px; font-size:13px; }
+  .tag { display:inline-block; padding:0 6px; border-radius:8px; font-size:11px; color:#fff; vertical-align:1px; }
+  .legend { font-size:12px; color:var(--muted); margin:6px 0; }
+  .legend span { margin-right:12px; white-space:nowrap; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:-1px; }
+  svg text { font:11px system-ui,sans-serif; fill:var(--ink); }
+  .note { font-size:12px; color:var(--muted); margin-top:10px; }
+  #tip { position:fixed; pointer-events:none; background:#fff; border:1px solid var(--line); border-radius:4px; padding:4px 8px; font-size:12px; box-shadow:0 2px 6px rgba(0,0,0,.15); display:none; max-width:300px; z-index:1000; }
+  @media (max-width:800px) { main { flex-direction:column; } #map { flex:0 0 40%; } #panel { border-left:0; border-top:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>ROAD sites linked to AADR ancient genomes</h1>
+  <p>Sites from the ROCEEH Out of Africa Database (ROAD) matched to genomes in the Allen Ancient DNA Resource (AADR v66.p1). Click a site for its timeline. <a href="https://github.com/PulkitT01/road2aadr">Code, data and evaluation</a></p>
+</header>
+<main>
+  <div id="map" role="application" aria-label="Map of linked sites"></div>
+  <section id="panel" aria-live="polite">
+    <label for="pick">Site: </label><select id="pick"></select>
+    <div class="legend" id="legend"></div>
+    <div id="detail"></div>
+  </section>
+</main>
+<div id="tip"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+<script>
+const COLORS = { "rule+wikidata": "#0f4c81", "rule": "#5b8db8", "wikidata": "#8e6bbf" };
+const EVIDENCE = { "rule+wikidata": "name/distance rule and shared Wikidata item", "rule": "name/distance rule only", "wikidata": "shared Wikidata item only" };
+const fmt = d3.format(",");
+const tip = d3.select("#tip");
+
+function strongest(site) {
+  return ["rule+wikidata", "rule", "wikidata"].find(e => site.links.some(l => l.evidence === e));
+}
+function showTip(event, text) {
+  tip.style("display", "block").text(text).style("left", (event.clientX + 12) + "px").style("top", (event.clientY + 12) + "px");
+}
+const hideTip = () => tip.style("display", "none");
+
+d3.json("data/sites.json").then(sites => {
+  sites.sort((a, b) => a.name.localeCompare(b.name));
+  const map = L.map("map", { worldCopyJump: true }).setView([35, 30], 3);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 12, attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
+
+  const markers = {};
+  sites.forEach(s => {
+    const m = L.circleMarker([s.lat, s.lon], { radius: 5 + Math.sqrt(s.genomes.length), color: "#fff", weight: 1, fillColor: COLORS[strongest(s)], fillOpacity: 0.9 })
+      .addTo(map).bindTooltip(`${s.name} (${s.genomes.length} genomes)`);
+    m.on("click", () => select(s.name));
+    markers[s.name] = m;
+  });
+  map.fitBounds(L.featureGroup(Object.values(markers)).getBounds().pad(0.1));
+
+  const pick = d3.select("#pick");
+  pick.selectAll("option").data(sites).join("option").attr("value", d => d.name).text(d => `${d.name} (${d.country})`);
+  pick.on("change", e => select(e.target.value));
+  d3.select("#legend").html("")
+    .selectAll("span").data(Object.keys(COLORS)).join("span")
+    .html(k => `<i class="dot" style="background:${COLORS[k]}"></i>${EVIDENCE[k]}`);
+
+  function select(name) {
+    const s = sites.find(d => d.name === name);
+    pick.property("value", name);
+    map.panTo([s.lat, s.lon]);
+    render(s);
+  }
+  select(sites.find(s => s.name === "Vindija")?.name ?? sites[0].name);
+});
+
+function render(s) {
+  const root = d3.select("#detail").html("");
+  root.append("h2").text(s.name);
+  root.append("p").attr("class", "sub").text(`${s.country} · ${s.layers.length} dated ROAD layers · ${s.genomes.length} AADR genomes`);
+
+  const ul = root.append("ul").attr("class", "links");
+  s.links.forEach(l => {
+    const li = ul.append("li");
+    li.append("span").attr("class", "tag").style("background", COLORS[l.evidence]).text(l.evidence);
+    li.append("span").text(` AADR site "${l.aadr_locality}", ${l.distance_km} km away`);
+    if (l.wikidata_qid) li.append("a").attr("href", "https://www.wikidata.org/wiki/" + l.wikidata_qid).text(" " + l.wikidata_qid);
+  });
+
+  timeline(root, s);
+  root.append("p").attr("class", "note").text(
+    "Ages are years before 1950 (BP) on a compressed scale: recent time is stretched, deep time is squeezed. " +
+    "ROAD layer ages come from the database and may include uncalibrated radiocarbon dates; AADR dates are mostly calibrated. " +
+    "A genome that is younger than the ROAD layers means the site was reused later, not necessarily a wrong link.");
+}
+
+function timeline(root, s) {
+  const W = 560, left = 150, right = 16, top = 34, rowH = 17, gap = 28;
+  const genomes = s.genomes.filter(g => g.date_bp != null);
+  const layers = s.layers;
+  const maxAge = d3.max([...layers.map(l => l.age_max), ...genomes.map(g => g.date_bp + (g.sd || 0))]) || 1000;
+  const x = d3.scaleSymlog().constant(2000).domain([maxAge * 1.05, 0]).range([left, W - right]);
+  const genomeBand = 46;
+  const H = top + genomeBand + gap + Math.max(layers.length, 1) * rowH + 10;
+  const svg = root.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("width", "100%").attr("role", "img")
+    .attr("aria-label", `Timeline of ${s.name}: ${layers.length} ROAD layers and ${genomes.length} AADR genome dates`);
+
+  const ticks = [0, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000].filter(t => t <= maxAge * 1.05);
+  svg.append("g").selectAll("line").data(ticks).join("line")
+    .attr("x1", x).attr("x2", x).attr("y1", top - 6).attr("y2", H - 4).attr("stroke", "#e8ecf1");
+  svg.append("g").selectAll("text").data(ticks).join("text")
+    .attr("x", x).attr("y", top - 12).attr("text-anchor", "middle").text(t => t === 0 ? "0" : d3.format(".2~s")(t));
+
+  svg.append("text").attr("x", 4).attr("y", top + 22).attr("font-weight", 600).style("fill", "var(--genome)").text("AADR genomes");
+  const gy = d => top + 14 + (d.row % 3) * 11;
+  genomes.sort((a, b) => a.date_bp - b.date_bp).forEach((g, i) => g.row = i);
+  const gg = svg.append("g").selectAll("g").data(genomes).join("g");
+  gg.append("line").attr("x1", g => x(g.date_bp + (g.sd || 0))).attr("x2", g => x(Math.max(0, g.date_bp - (g.sd || 0))))
+    .attr("y1", gy).attr("y2", gy).attr("stroke", "var(--genome)").attr("opacity", 0.45);
+  gg.append("circle").attr("cx", g => x(g.date_bp)).attr("cy", gy).attr("r", 3.5).attr("fill", "var(--genome)")
+    .on("mousemove", (e, g) => showTip(e, `${g.id}: ${fmt(Math.round(g.date_bp))} BP${g.sd ? " ± " + Math.round(g.sd) : ""}. ${g.pub || ""}`))
+    .on("mouseleave", hideTip);
+
+  const y0 = top + genomeBand + gap;
+  svg.append("text").attr("x", 4).attr("y", y0 - 10).attr("font-weight", 600).style("fill", "var(--layer)").text("ROAD layers");
+  if (!layers.length) svg.append("text").attr("x", left).attr("y", y0 + 4).text("ROAD has no dated layers for this site");
+  layers.forEach((l, i) => {
+    const y = y0 + i * rowH;
+    const label = l.label.length > 22 ? l.label.slice(0, 21) + "…" : l.label;
+    svg.append("text").attr("x", left - 6).attr("y", y + 11).attr("text-anchor", "end").text(label);
+    const x1 = x(l.age_max), x2 = x(l.age_min);
+    svg.append("rect").attr("x", x1).attr("y", y + 1).attr("width", Math.max(3, x2 - x1)).attr("height", rowH - 5)
+      .attr("fill", "var(--layer)").attr("rx", 2)
+      .on("mousemove", e => showTip(e, `${l.label}: ${fmt(l.age_max)} to ${fmt(l.age_min)} BP${l.cultural_period ? " · " + l.cultural_period : ""}`))
+      .on("mouseleave", hideTip);
+  });
+}
+</script>
+</body>
+</html>
